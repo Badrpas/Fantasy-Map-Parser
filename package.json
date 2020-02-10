@@ -1,0 +1,13 @@
+{
+  "name": "fantasy-map-parser",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Vadim Samarin <dezivert@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}
