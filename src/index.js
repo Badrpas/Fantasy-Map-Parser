@@ -4,15 +4,20 @@ const util = require('util');
 const parseParameters = require('./parsers/params');
 const parseOptions = require('./parsers/options');
 const parseBiomes = require('./parsers/biomes');
+const extractSvg = require('./parsers/svg');
+
+const fixSvgMultiline = require('./convert');
 
 /**
  * Parses .map file text into an object
  * @param {String} text map file contents
  */
 function parseMapFileString(text) {
-  const lines = text.split(/\r?\n/);
+  const lines = fixSvgMultiline(text.split(/\r?\n/));
+
   const [
-    paramsRow, optionsRow, coordinatesRow, biomesRow , notesRow
+    paramsRow, optionsRow, coordinatesRow, biomesRow, notesRow,
+    svgRow,
   ] = lines;
   const params = parseParameters(paramsRow);
   const options = parseOptions(optionsRow);
@@ -25,7 +30,8 @@ function parseMapFileString(text) {
     options,
     coordinates,
     biomes,
-    notes
+    notes,
+    svgText: svgRow,
   };
 }
 

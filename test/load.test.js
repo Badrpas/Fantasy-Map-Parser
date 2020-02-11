@@ -1,11 +1,12 @@
 const Parser = require('../src/index.js');
 const path = require('path');
-const fileName = path.join(__dirname, './data/test.map');
+const fileName = path.join(__dirname, './data/test-converted.map');
 
 it('test params object', async () => {
   const result = await Parser.loadFileAndParse(fileName);
 
-  expect(result).toEqual({
+  expect(result).toEqual(expect.objectContaining({
+    svgText: expect.stringContaining('</svg>'),
     params: {
       version: '1.22',
       description: 'File can be loaded in azgaar.github.io/Fantasy-Map-Generator',
@@ -207,7 +208,7 @@ it('test params object', async () => {
         legend: 'A historical battlefield spot. \r\nDate: September 24, 792 Thatc Era'
       }
     ]
-  });
+  }));
 });
 
 
