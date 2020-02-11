@@ -4,7 +4,7 @@ const fileName = path.join(__dirname, './data/test.map');
 
 it('test params object', async () => {
   const result = await Parser.loadFileAndParse(fileName);
-
+expect(true).toBe(false);
   expect(result).toEqual({
     params: {
       version: '1.22',
