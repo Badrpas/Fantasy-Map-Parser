@@ -3,6 +3,8 @@ const util = require('util');
 
 const parseParameters = require('./parsers/params');
 const parseOptions = require('./parsers/options');
+const parseBiomes = require('./parsers/biomes');
+
 /**
  * Parses .map file text into an object
  * @param {String} text map file contents
@@ -10,14 +12,20 @@ const parseOptions = require('./parsers/options');
 function parseMapFileString(text) {
   const lines = text.split(/\r?\n/);
   const [
-    paramsRow, optionsRow
+    paramsRow, optionsRow, coordinatesRow, biomesRow , notesRow
   ] = lines;
   const params = parseParameters(paramsRow);
   const options = parseOptions(optionsRow);
+  const coordinates =  JSON.parse(coordinatesRow);
+  const biomes = parseBiomes(biomesRow);
+  const notes = JSON.parse(notesRow);
 
   return {
     params,
-    options
+    options,
+    coordinates,
+    biomes,
+    notes
   };
 }
 
@@ -29,12 +37,9 @@ const readFile = util.promisify(fs.readFile);
  */
 async function loadFileAndParse(fileName) {
   const text = await readFile(fileName, 'utf8');
-// console.log(text);
 
   return parseMapFileString(text);
 }
-
-
 
 
 module.exports = {
