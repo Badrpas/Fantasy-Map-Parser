@@ -14,6 +14,6 @@ jobs:
     - name: Run Tests
       run: yarn test --coverage
     - name: Code Coverage
-    - uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
