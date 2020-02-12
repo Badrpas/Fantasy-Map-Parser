@@ -5,6 +5,8 @@ const fileName = path.join(__dirname, './data/test-converted.map');
 it('test params object', async () => {
   const result = await Parser.loadFileAndParse(fileName);
 
+  require('fs').writeFile(path.join(__dirname, '../temp-map.json'), JSON.stringify(result, 2, 2));
+
   expect(result).toEqual(expect.objectContaining({
     svgText: expect.stringContaining('</svg>'),
     params: {
